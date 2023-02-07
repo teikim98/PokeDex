@@ -1,9 +1,12 @@
-
+import "./input.css"
 
 function App() {
+
   return (
     <>
-      <h1>hello</h1>
+      <div className="min-h-screen bg-gray-500">
+        <h2 className="text-center text-4xl font-bold text-blue-900">TailwindCSS + React</h2>
+      </div>
     </>
   );
 }
