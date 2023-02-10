@@ -1,12 +1,22 @@
-import "./input.css"
+import { BrowserRouter, Route, Routes } from "react-router-dom"
+import { QueryClient, QueryClientProvider } from "react-query"
+import Home from "./pages/Home";
+
+
 
 function App() {
 
+  const queryClient = new QueryClient();
+
   return (
     <>
-      <div className="min-h-screen bg-gray-500">
-        <h2 className="text-center text-4xl font-bold text-blue-900">TailwindCSS + React</h2>
-      </div>
+      <QueryClientProvider client={queryClient}>
+        <BrowserRouter>
+          <Routes>
+            <Route path="/" element={<Home />} />
+          </Routes>
+        </BrowserRouter>
+      </QueryClientProvider>
     </>
   );
 }
