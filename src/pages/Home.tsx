@@ -2,19 +2,25 @@ import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { useQuery } from "react-query";
 import { fetchPokemons } from '../api/api';
-
-export interface Result {
-    name: string;
-    url: string;
-}
+import { useState } from 'react';
 
 export interface IPokemon {
-    count: number;
-    next: string;
-    previous?: any;
-    results: Result[];
+  id: number,
+  name: string,
+  sprites: {
+    back_default: string
+    front_default: string
+  }
+  types: [
+    {
+      slot: number,
+      type: {
+        name: string
+        url: string
+      }
+    }
+  ]
 }
-
 
 const Container = styled.div`
   padding: 0px 20px;
@@ -61,24 +67,35 @@ const Img = styled.img`
 
 function Home() {
 
-    const { isLoading, data } = useQuery<IPokemon[]>("allPokemons", fetchPokemons);
+  const [poke, setPoke] = useState<IPokemon[]>();
 
-    return (
-        <Container>
-            <Header>
-                <Title>코인</Title>
-            </Header>
-            {isLoading ? (
-                <Loader>Loading...</Loader>
-            ) : (
-                <CoinsList>
-                    {data?.results.map((poke) => (
-                        <h1>{poke.name}</h1>
-                    ))}
-                </CoinsList>
-            )}
-        </Container>
-    );
+  const getPokemons = () => {
+
+    const pokemons = [];
+    for (var i = 1; i <= 10; i++) {
+      pokemons.push(fetchPokemons(i));
+    }
+    setPoke(pokemons);
+  }
+
+  return (
+    <Container>
+      <Header>
+        <Title>Poke</Title>
+      </Header>
+      {isLoading ? (
+        <Loader>Loading...</Loader>
+      ) : (
+        <CoinsList>
+          {data?.results.map((poke) => (
+            <div key={poke.name}>
+              <h1>{poke.name}</h1>
+            </div>
+          ))}
+        </CoinsList>
+      )}
+    </Container>
+  );
 }
 
 export default Home;
