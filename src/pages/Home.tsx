@@ -15,7 +15,7 @@ const Home: React.FC<{}> = () => {
 
   return (
     <div>
-      <h1>Home</h1>
+      <h1 className="text-3xl font-bold underline red">Home</h1>
       {pokemons.data?.data.results.map((pokemon: PokemonsResponseResult) => (
         <PokemonCards name={pokemon.name} />
       ))}
