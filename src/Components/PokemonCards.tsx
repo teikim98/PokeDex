@@ -1,9 +1,29 @@
-import { ReactNode } from "react";
-import useFindPokemon from "../Hooks/findPokemons";
+import useFindPokemon from "../Hooks/findPokemons"
+import styled from 'styled-components'
 
 type PokemonCardProps = {
     name: string
 }
+
+const PokemonCard = styled.div`
+    width:400px;
+    height: auto;
+    padding: 30px;
+    margin: 10px;
+    border: 2px;
+    border-style: solid;
+    border-radius: 30px;
+`
+const PokemonCardWrapper = styled.div`
+   display: flex;
+   flex-direction: column;
+   justify-content: center;
+   align-items: center;
+   & img {
+    width : 200px;
+    height: 200px;
+   }
+`
 
 const PokemonCards: React.FC<PokemonCardProps> = ({ name }) => {
 
@@ -18,16 +38,18 @@ const PokemonCards: React.FC<PokemonCardProps> = ({ name }) => {
         )
     }
     return (
-        <div>
-            <img
-                src={
-                    otherSprites?.dream_world.front_default ||
-                    otherSprites?.["official-artwork"].front_default
-                }
-                alt={pokemon.data?.data.name}
-            />
-            <h2 className=" font-bold underline">{pokemon.data?.data.name}</h2>
-        </div>
+        <PokemonCard>
+            <PokemonCardWrapper>
+                <img
+                    src={
+                        otherSprites?.dream_world.front_default ||
+                        otherSprites?.["official-artwork"].front_default
+                    }
+                    alt={pokemon.data?.data.name}
+                />
+                <h2 className=" font-bold underline">{pokemon.data?.data.name}</h2>
+            </PokemonCardWrapper>
+        </PokemonCard>
     )
 }
 
