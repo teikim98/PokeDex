@@ -19,9 +19,13 @@ const PokemonCardWrapper = styled.div`
    flex-direction: column;
    justify-content: center;
    align-items: center;
+   transition: transform .2s;
    & img {
     width : 200px;
     height: 200px;
+   }
+   &:hover{
+    transform: scale(1.1);
    }
 `
 
