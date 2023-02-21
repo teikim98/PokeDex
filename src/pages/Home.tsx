@@ -3,6 +3,10 @@ import { PokemonsResponseResult } from "../@types/api";
 import { pokemonApi } from '../api/'
 import PokemonCards from "../components/PokemonCards";
 import styled from 'styled-components'
+import { useMemo } from "react";
+import { searchState } from "../store/atom"
+import { useRecoilState } from "recoil";
+import Header from "../components/Header";
 
 const Container = styled.div`
   margin: 0 auto;
@@ -18,9 +22,22 @@ const Wrapper = styled.div`
 
 const Home: React.FC<{}> = () => {
 
+  const [filterdPokemon, setFilterdPokemon] = useRecoilState(searchState);
+
+
   const pokemons = useQuery("pokemons", () => {
     return pokemonApi.getAllPokemons();
   })
+
+  const filterPoke = useMemo(() => {
+    if (filterdPokemon === "") {
+      return pokemons.data?.data.results;
+    }
+    return pokemons.data?.data.results.filter((pokemon) => {
+      return pokemon.name.includes(filterdPokemon)
+    })
+
+  }, [filterdPokemon, pokemons.data])
 
   if (pokemons.isLoading) {
     return <div>loading</div>;
@@ -28,9 +45,9 @@ const Home: React.FC<{}> = () => {
 
   return (
     <Container>
-      <h1 className="text-3xl font-bold underline red">Pokemons</h1>
+      <Header />
       <Wrapper>
-        {pokemons.data?.data.results.map((pokemon: PokemonsResponseResult) => (
+        {filterPoke?.map((pokemon: PokemonsResponseResult) => (
           <PokemonCards name={pokemon.name} />
         ))}
       </Wrapper>

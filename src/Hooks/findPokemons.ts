@@ -1,5 +1,4 @@
 import { useQuery } from "react-query";
-
 import { pokemonApi } from "../api";
 
 const useFindPokemon = (name: string | undefined) => {
