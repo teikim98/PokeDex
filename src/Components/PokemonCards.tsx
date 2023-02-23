@@ -1,8 +1,9 @@
 import useFindPokemon from "../Hooks/findPokemons"
+import { Link } from "react-router-dom";
 import styled from 'styled-components'
 
 type PokemonCardProps = {
-    name: string
+    name?: string
 }
 
 const PokemonCard = styled.div`
@@ -42,18 +43,23 @@ const PokemonCards: React.FC<PokemonCardProps> = ({ name }) => {
         )
     }
     return (
-        <PokemonCard>
-            <PokemonCardWrapper>
-                <img
-                    src={
-                        otherSprites?.dream_world.front_default ||
-                        otherSprites?.["official-artwork"].front_default
-                    }
-                    alt={pokemon.data?.data.name}
-                />
-                <h2 className=" font-bold underline">{pokemon.data?.data.name}</h2>
-            </PokemonCardWrapper>
-        </PokemonCard>
+        <Link to={`/${name}`}>
+            <PokemonCard>
+                <PokemonCardWrapper>
+
+                    <img
+                        src={
+                            otherSprites?.dream_world.front_default ||
+                            otherSprites?.["official-artwork"].front_default
+                        }
+                        alt={pokemon.data?.data.name}
+                    />
+                    <h2 className=" font-bold underline">{pokemon.data?.data.name}</h2>
+
+                </PokemonCardWrapper>
+            </PokemonCard>
+        </Link>
+
     )
 }
 

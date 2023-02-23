@@ -6,6 +6,19 @@ import React from 'react';
 import {
   RecoilRoot
 } from 'recoil';
+import { createGlobalStyle } from "styled-components";
+import Pokemon from "./pages/Pokemon";
+
+const GlobalStyle = createGlobalStyle`
+  *, *::before, *::after {
+    box-sizing: border-box;
+  }
+
+  a {
+    color : inherit;
+  text-decoration: none;
+  }
+`;
 
 
 function App() {
@@ -16,9 +29,11 @@ function App() {
     <>
       <QueryClientProvider client={queryClient}>
         <RecoilRoot>
+          <GlobalStyle />
           <BrowserRouter>
             <Routes>
               <Route path="/" element={<Home />} />
+              <Route path="/:pokemon" element={<Pokemon></Pokemon>} />
             </Routes>
           </BrowserRouter>
         </RecoilRoot>

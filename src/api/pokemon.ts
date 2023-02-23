@@ -2,7 +2,7 @@ import client from "./client";
 import { PokemonResponse, PokemonsResponse } from "../@types/api";
 
 const getAllPokemons = async (): Promise<PokemonsResponse> =>
-  client.get("/pokemon?limit=151");
+  client.get("/pokemon?limit=200");
 
 const getPokemon = async (name: string): Promise<PokemonResponse> =>
   client.get(`/pokemon/${name}`);
