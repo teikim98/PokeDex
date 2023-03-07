@@ -30,7 +30,7 @@ function App() {
       <QueryClientProvider client={queryClient}>
         <RecoilRoot>
           <GlobalStyle />
-          <BrowserRouter>
+          <BrowserRouter basename="/PokeDex">
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/:pokemon" element={<Pokemon></Pokemon>} />
