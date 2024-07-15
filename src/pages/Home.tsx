@@ -27,7 +27,7 @@ const Home: React.FC<{}> = () => {
 
   const pokemons = useQuery("pokemons", () => {
     return pokemonApi.getAllPokemons();
-  })
+  }) //pokeApi 에서 포켓몬 받아오기
 
   const filterPoke = useMemo(() => {
     if (filterdPokemon === "") {
@@ -35,12 +35,12 @@ const Home: React.FC<{}> = () => {
     }
     return pokemons.data?.data.results.filter((pokemon) => {
       return pokemon.name.includes(filterdPokemon)
-    })
+    }) // 검색결과를 포함하는 포켓몬만 출력
 
   }, [filterdPokemon, pokemons.data])
 
   if (pokemons.isLoading) {
-    return <div>loading</div>;
+    return <div>is loading</div>;
   }
 
   return (
